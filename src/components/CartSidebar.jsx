@@ -1,12 +1,15 @@
+import { useCart } from '../context/CartContext';
 import '../styles/CartSidebar.css';
 
-function CartSidebar({ isOpen, onClose, cart, onUpdateQuantity, onRemoveItem }) {
+function CartSidebar() {
+  const { isCartOpen, onClose, cart, onUpdateQuantity, onRemoveItem, getTotalPrice } = useCart();
+
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return getTotalPrice();
   };
 
   return (
-    <aside className={`cart-sidebar ${isOpen ? 'open' : ''}`}>
+    <aside className={`cart-sidebar ${isCartOpen ? 'open' : ''}`}>
       <div className="cart-sidebar-header">
         <div>
           <h2>Your Cart</h2>
